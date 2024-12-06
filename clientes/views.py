@@ -78,7 +78,7 @@ def generar_pdf_cliente (request):
     pdf.drawString(x, height -40, texto)
 
     #Imagen a lado del encabezado
-    img_ruta ='/static/img/ClientesT.JPEG'
+    img_ruta ="/static/img/ClientesT.JPEG"
     img_x=400
     img_y= height -70
     img_ancho= 80
