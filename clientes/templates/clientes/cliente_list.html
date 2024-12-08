@@ -1,143 +1,151 @@
-<style>
-    /* Estilo general */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f8ff;
-    }
-    header .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #333;
-        padding: 10px;
-        color: white;
-    }
-    header .navbar a {
-        color: white;
-        text-decoration: none;
-        margin: 0 5px;
-    }
-    .container {
-        padding: 20px;
-        max-width: 800px;
-        margin: auto;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    h1 {
-        text-align: center;
-        color: #0d6efd;
-        font-size: 24px;
-    }
-    .search {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    .search input {
-        flex: 1;
-        padding: 10px;
-        font-size: 16px;
-    }
-    .search button {
-        padding: 10px 20px;
-        font-size: 14px;
-        background-color: #0d6efd;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .search button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Estilos para la tabla */
-    .clientes-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-    .clientes-table th,
-    .clientes-table td {
-        text-align: left;
-        padding: 10px;
-        border: 1px solid #87ceeb;
-    }
-    .clientes-table th {
-        background-color: #0d6efd;
-        color: white;
-        font-size: 14px;
-    }
-    .clientes-table td {
-        font-size: 14px;
-    }
-    .clientes-table a {
-        display: inline-block;
-        padding: 5px 10px;
-        text-decoration: none;
-        color: white;
-        font-size: 12px;
-        border-radius: 5px;
-        text-align: center;
-    }
-    .clientes-table a.editar {
-        background-color: #87ceeb;
-    }
-    .clientes-table a.eliminar {
-        background-color: #f55;
-    }
-    .clientes-table a:hover {
-        opacity: 0.8;
-    }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #0d6efd;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        border-radius: 5px;
-        margin: 5px 0;
-    }
-    .btn:hover {
-        background-color: #0056b3;
-    }
-
-    /* Diseño responsivo */
-    @media (max-width: 600px) {
-        .clientes-table {
-            border: 0;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'clientes/style.css' %}">
+    <style>
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
         }
-        .clientes-table thead {
-            display: none;
-        }
-        .clientes-table tr {
-            display: block;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-        .clientes-table td {
+        header .navbar {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            background-color: #333;
             padding: 10px;
+            color: white;
+        }
+        header .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #0d6efd;
+            font-size: 24px;
+        }
+        .search {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search input, .search button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .clientes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .clientes-table th {
+            background-color: #0d6efd;
+            color: white;
+            text-align: left;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .clientes-table td {
+            padding: 10px;
+            border: 1px solid #87CEEB;
+            text-align: left;
+        }
+        .clientes-table a {
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
             font-size: 14px;
-            border: 0;
-            border-bottom: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
         }
-        .clientes-table td:last-child {
-            border-bottom: 0;
+        .clientes-table a.editar {
+            background-color: #87CEEB;
         }
-        .clientes-table td:before {
-            content: attr(data-label);
-            font-weight: bold;
-            color: #333;
+        .clientes-table a.eliminar {
+            background-color: #87CEEB;
         }
-    }
-</style>
+        .clientes-table a:hover {
+            opacity: 0.8;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #87CEEB;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .btn:hover {
+            background-color: #87CEEB;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar Sesión</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="container"> 
+        <h1>Lista de Clientes</h1>
+        <form class="search" method="get">
+            <input type="text" name="q" placeholder="Buscar cliente...">
+            <button type="submit">Buscar</button> 
+        </form>
+        <table class="clientes-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    {% if user.is_authenticated %}
+                        <th colspan="2">Opciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.fecha_nac }}</td>
+                    {% if user.is_authenticated %}
+                        <td><a href="{% url 'update_cliente' cliente.pk %}" class="editar">Editar</a></td>
+                        <td><a href="{% url 'delete_cliente' cliente.pk %}" class="eliminar">Eliminar</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if user.is_authenticated %}
+            <a class="btn" href="{% url 'create_cliente' %}">Agregar cliente</a>
+        {% endif %}
+        <a class="btn" href="{% url 'generar_pdf_cliente' %}?q={{ request.GET.q }}">Generar PDF</a>
+    </div>
+</body>
+</html>
